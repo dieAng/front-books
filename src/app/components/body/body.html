@@ -1,0 +1,37 @@
+<div class="container">
+  <br>
+
+  <!-- Loading -->
+  <div *ngIf="loading" class="text-center my-3" aria-live="polite">
+    <div class="spinner-border" role="status" aria-hidden="true"></div>
+    <span class="sr-only">Cargando...</span>
+  </div>
+
+  <!-- Error -->
+  <div *ngIf="errorMessage" class="alert alert-danger" role="alert">
+    {{ errorMessage }}
+  </div>
+
+  <!-- Empty state -->
+  <div *ngIf="!loading && !errorMessage && (!arrCategorias || arrCategorias.length === 0)" class="alert alert-info">
+    No se encontraron categorías.
+  </div>
+
+  <!-- Tabla de categorías (solo si hay datos) -->
+  <table *ngIf="!loading && arrCategorias && arrCategorias.length > 0" class="table">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Nombre</th>
+        <th scope="col">Descripción</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of arrCategorias; trackBy: trackById">
+        <th scope="row">{{ item.id }}</th>
+        <td>{{ item.nombre }}</td>
+        <td>{{ item.descripcion }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
